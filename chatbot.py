@@ -18,11 +18,11 @@ load_dotenv()
 SPACY_MODEL_DIR = os.path.join(os.getcwd(), "spacy_model")
 
 try:
+    # Try loading the full English model
     nlp = spacy.load("en_core_web_sm")
 except OSError:
-    # Download model to local directory
-    download("en_core_web_sm", target=SPACY_MODEL_DIR)
-    nlp = spacy.load(os.path.join(SPACY_MODEL_DIR, "en_core_web_sm"))
+    # Fall back to a blank English model (minimal tokenizer)
+    nlp = spacy.blank("en")
 
 # Prompt Registries
 # ------------------------------------
