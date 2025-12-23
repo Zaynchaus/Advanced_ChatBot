@@ -1,0 +1,7 @@
+streamlit
+openai
+python-dotenv
+pillow
+pytesseract
+spacy
+opencv-python-headless
