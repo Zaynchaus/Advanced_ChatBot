@@ -8,18 +8,21 @@ from PIL import Image
 from openai import OpenAI
 from dotenv import load_dotenv
 from spacy.cli import download
+import os
 
 load_dotenv()
 
 
 # Load NLP
 # ------------------------------------
+SPACY_MODEL_DIR = os.path.join(os.getcwd(), "spacy_model")
+
 try:
     nlp = spacy.load("en_core_web_sm")
 except OSError:
-    download("en_core_web_sm")
-    nlp = spacy.load("en_core_web_sm")
-
+    # Download model to local directory
+    download("en_core_web_sm", target=SPACY_MODEL_DIR)
+    nlp = spacy.load(os.path.join(SPACY_MODEL_DIR, "en_core_web_sm"))
 
 # Prompt Registries
 # ------------------------------------
