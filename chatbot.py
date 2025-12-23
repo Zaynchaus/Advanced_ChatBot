@@ -7,13 +7,18 @@ import streamlit as st
 from PIL import Image
 from openai import OpenAI
 from dotenv import load_dotenv
+from spacy.cli import download
 
 load_dotenv()
 
 
 # Load NLP
 # ------------------------------------
-nlp = spacy.load("en_core_web_sm")
+try:
+    nlp = spacy.load("en_core_web_sm")
+except OSError:
+    download("en_core_web_sm")
+    nlp = spacy.load("en_core_web_sm")
 
 
 # Prompt Registries
